@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:128px}
 body{font-family:"Plus Jakarta Sans",sans-serif;background:#f4f5f7;color:#0d1b2a;-webkit-font-smoothing:antialiased}
 a{text-decoration:none;color:inherit}
 :root{
@@ -178,7 +178,7 @@ a{text-decoration:none;color:inherit}
 @keyframes capLbl4{0%,75%{color:rgba(0,210,235,0)}78%,97%{color:rgba(0,210,235,.9)}100%{color:rgba(0,210,235,0)}}
 
 /* ── SOLUTIONS ── */
-.solutions-section{background:#fff;padding:64px 80px 56px}
+.solutions-section{background:#fff;padding:clamp(32px,5.5vh,64px) 80px clamp(28px,4.5vh,56px)}
 .solutions-layout{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:stretch}
 @media(max-width:960px){.solutions-layout{grid-template-columns:1fr}}
 .sol-header{margin-bottom:20px}
@@ -233,8 +233,8 @@ h2.section-title.light{color:#fff}
 .video-placeholder-lbl{font-size:11px;color:rgba(255,255,255,.3);text-align:center;padding:0 16px}
 
 /* ── SMARTPRICE ── */
-.smartprice-section{background:var(--navy);display:flex;flex-direction:column;justify-content:center;padding:80px 80px 80px;color:#fff}
-.smartprice-top{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;margin-bottom:48px}
+.smartprice-section{background:var(--navy);display:flex;flex-direction:column;justify-content:center;padding:clamp(36px,5.5vh,80px) 80px;color:#fff}
+.smartprice-top{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;margin-bottom:clamp(24px,3.5vh,48px)}
 @media(max-width:960px){.smartprice-top{grid-template-columns:1fr}}
 .spotlight-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(0,172,193,.12);border:1px solid rgba(0,172,193,.2);color:var(--cyan);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border-radius:30px;margin-bottom:16px}
 .spotlight h2{font-size:clamp(24px,3vw,38px);font-weight:800;line-height:1.1;letter-spacing:-.03em;color:#fff;margin-bottom:10px}
@@ -252,7 +252,7 @@ h2.section-title.light{color:#fff}
 .sp-cluster-outer{display:flex;align-items:center;justify-content:center;position:relative}
 .sp-cluster-outer::before{content:"";position:absolute;inset:-30%;background:radial-gradient(circle at center,rgba(0,172,193,.18) 0%,rgba(21,101,192,.1) 38%,transparent 70%);pointer-events:none;z-index:0;border-radius:50%}
 .sp-cluster-wrap{position:relative;z-index:1}
-.sp-cluster-wrap{width:clamp(260px,42vw,480px);height:360px;filter:drop-shadow(0 0 48px rgba(0,172,193,.22)) drop-shadow(0 20px 50px rgba(0,0,0,.28))}
+.sp-cluster-wrap{width:clamp(260px,42vw,480px);height:clamp(280px,38vh,360px);filter:drop-shadow(0 0 48px rgba(0,172,193,.22)) drop-shadow(0 20px 50px rgba(0,0,0,.28))}
 .sp-ui-main{position:absolute;top:24px;right:0;background:#fff;border-radius:16px;border:1px solid #d1d5db;padding:1rem 1.2rem .95rem;box-shadow:0 16px 50px rgba(0,0,0,.22);width:min(400px,90vw);font-size:.76rem;font-family:"DM Sans",sans-serif}
 .sp-ui-header-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.45rem}
 .sp-ui-title{font-size:.85rem;font-weight:600;color:#212529}
@@ -540,6 +540,11 @@ h2.section-title.light{color:#fff}
   .hero-badge.cmmc-badge img{
     height:54px;
   }
+  /* Gently reduce section padding at this threshold too */
+  .solutions-section{padding:36px 80px 30px}
+  .smartprice-section{padding:36px 80px}
+  .usecase-section{padding:44px 80px}
+  .cta-section{padding:52px 80px}
 }
 
 @media(max-width:980px){
@@ -1200,7 +1205,48 @@ h2.section-title.light{color:#fff}
   /* Buttons */
   .btn-primary,.btn-secondary{font-size:13px;padding:11px 20px}
 }
-/* END MOBILE RESPONSIVE FIXES */
+/* ── SHORT VIEWPORT — 150% zoom / 14" laptop at scaled resolution ── */
+@media(max-height:800px) and (min-width:900px){
+  /* Solutions: tighten vertical rhythm */
+  .solutions-section{padding:28px 80px 24px}
+  .solutions-layout{gap:32px}
+  .sol-header{margin-bottom:12px}
+  .section-sub{margin-bottom:16px}
+  .sol-grid{gap:8px}
+  .video-wrap{min-height:140px}
+  .video-panel-title{font-size:15px}
+  .solutions-right{gap:8px}
+
+  /* SmartPRICE: tighten top/bottom and inner spacing */
+  .smartprice-section{padding:28px 80px}
+  .smartprice-top{margin-bottom:20px;gap:28px}
+  .sp-cluster-wrap{height:clamp(240px,32vh,300px)}
+  .spotlight h2{font-size:clamp(20px,2.4vw,30px)}
+  .spotlight-sub{font-size:12px;line-height:1.55;margin-bottom:14px}
+  .feature-list{gap:6px;margin-bottom:14px}
+  .sp-features-header{margin-bottom:12px;padding-top:6px}
+  .sp-features{gap:8px}
+  .sp-feature-card{padding:10px 12px}
+  .sp-feature-card h4{font-size:12px}
+  .sp-feature-card p{font-size:11px}
+
+  /* Use cases: compact */
+  .usecase-section{padding:28px 80px}
+
+  /* CTA: compact */
+  .cta-section{padding:44px 80px}
+}
+
+/* Extra tight for very short viewports (< 680px height) */
+@media(max-height:680px) and (min-width:900px){
+  .solutions-section{padding:20px 80px 18px}
+  .smartprice-section{padding:20px 80px}
+  .sp-cluster-wrap{height:clamp(220px,28vh,260px)}
+  .usecase-section{padding:20px 80px}
+  .cta-section{padding:32px 80px}
+}
+
+/* END SHORT VIEWPORT FIXES */
 .sp-tw-logo{height:18px;max-width:130px;width:auto;opacity:.88;filter:brightness(0) invert(1);flex-shrink:0;display:block}
 .sp-tw-label{font-size:13px;color:rgba(255,255,255,.65);font-weight:500;line-height:1.4}
 .sp-usage-line{font-size:13px;color:rgba(255,255,255,.5);margin-top:8px;font-style:italic}
@@ -1262,7 +1308,7 @@ h2.section-title.light{color:#fff}
   <div class="hero-glow"></div>
   <div class="hero-glow2"></div>
   <div class="hero-content reveal">
-    <div class="hero-eyebrow">TRG Technology Solutions</div>
+
     <h1>Intelligent <span class="hl">Technology<br>Solutions</span> for Any<br>Organization,<br>Any Mission</h1>
     <p class="hero-sub">We help organizations modernize operations, automate workflows, and accelerate mission delivery through AI, low-code solutions, and data analytics.</p>
     <div class="hero-badges hero-logo-badges" aria-label="TRG marketplace and certification badges">
