@@ -252,8 +252,8 @@ h2.section-title.light{color:#fff}
 .sp-cluster-outer{display:flex;align-items:center;justify-content:center;position:relative}
 .sp-cluster-outer::before{content:"";position:absolute;inset:-30%;background:radial-gradient(circle at center,rgba(0,172,193,.18) 0%,rgba(21,101,192,.1) 38%,transparent 70%);pointer-events:none;z-index:0;border-radius:50%}
 .sp-cluster-wrap{position:relative;z-index:1}
-.sp-cluster-wrap{width:clamp(340px,42vw,480px);height:360px;filter:drop-shadow(0 0 48px rgba(0,172,193,.22)) drop-shadow(0 20px 50px rgba(0,0,0,.28))}
-.sp-ui-main{position:absolute;top:24px;right:0;background:#fff;border-radius:16px;border:1px solid #d1d5db;padding:1rem 1.2rem .95rem;box-shadow:0 16px 50px rgba(0,0,0,.22);width:400px;font-size:.76rem;font-family:"DM Sans",sans-serif}
+.sp-cluster-wrap{width:clamp(260px,42vw,480px);height:360px;filter:drop-shadow(0 0 48px rgba(0,172,193,.22)) drop-shadow(0 20px 50px rgba(0,0,0,.28))}
+.sp-ui-main{position:absolute;top:24px;right:0;background:#fff;border-radius:16px;border:1px solid #d1d5db;padding:1rem 1.2rem .95rem;box-shadow:0 16px 50px rgba(0,0,0,.22);width:min(400px,90vw);font-size:.76rem;font-family:"DM Sans",sans-serif}
 .sp-ui-header-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.45rem}
 .sp-ui-title{font-size:.85rem;font-weight:600;color:#212529}
 .sp-ui-progress-text{font-size:.63rem;color:#6c757d}
@@ -1057,6 +1057,150 @@ h2.section-title.light{color:#fff}
 
 /* SmartPRICE Tradewinds + usage line styles */
 .sp-tradewinds-row{display:flex;align-items:center;gap:12px;margin-top:20px;padding-top:18px;border-top:1px solid rgba(255,255,255,.1)}
+
+/* ═══════════════════════════════════════════════════
+   MOBILE RESPONSIVE FIXES — full screen adaptability
+   ═══════════════════════════════════════════════════ */
+
+/* Hamburger button */
+.nav-hamburger{
+  display:none;flex-direction:column;justify-content:center;gap:5px;
+  width:40px;height:40px;background:none;border:none;cursor:pointer;
+  padding:6px;border-radius:var(--radius-sm);transition:var(--transition);flex-shrink:0;
+}
+.nav-hamburger:hover{background:var(--gray-100)}
+.nav-hamburger span{display:block;width:22px;height:2px;background:var(--navy);border-radius:2px;transition:var(--transition)}
+.nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay{
+  display:none;position:fixed;top:72px;left:0;right:0;background:#fff;
+  z-index:198;border-bottom:1px solid var(--gray-200);
+  padding:8px 24px 16px;box-shadow:0 8px 24px rgba(0,0,0,.1);
+}
+.mobile-nav-overlay.open{display:block}
+.mobile-nav-overlay a{
+  display:block;padding:12px 0;border-bottom:1px solid var(--gray-100);
+  color:var(--text-secondary);font-size:14px;font-weight:600;
+  letter-spacing:.04em;text-transform:uppercase;transition:var(--transition);
+}
+.mobile-nav-overlay a:hover{color:var(--navy)}
+.mobile-nav-overlay a.nav-active{color:var(--navy);font-weight:700}
+.mobile-nav-overlay a:last-child{border-bottom:none}
+
+/* ── TABLET (≤900px) ── */
+@media(max-width:900px){
+  /* Sub-nav: hide terminal brand, compress */
+  .terminal-brand{display:none}
+  .sub-nav{
+    grid-template-columns:1fr auto;
+    padding:0 20px;
+    gap:8px;
+  }
+  .sub-nav-links{justify-self:start;gap:0}
+  .sub-nav-links a{font-size:13px;padding:5px 11px}
+  .sub-nav-cta{font-size:12px;padding:6px 14px}
+
+  /* Solutions expansion inner: stack */
+  .sol-expansion-inner{grid-template-columns:1fr;gap:14px}
+
+  /* Sections */
+  .solutions-section{padding:52px 32px 44px}
+  .smartprice-section{padding:60px 32px}
+  .usecase-section{padding:56px 32px}
+  .cta-section{padding:64px 32px}
+}
+
+/* ── MOBILE (≤768px) ── */
+@media(max-width:768px){
+  /* Main nav: show hamburger, hide desktop links */
+  .main-nav{padding:0 20px}
+  .main-nav-links{display:none}
+  .nav-hamburger{display:flex}
+
+  /* Sub-nav: 2-col */
+  .sub-nav{
+    grid-template-columns:1fr auto;
+    padding:0 16px;
+  }
+  .sub-nav-links a{font-size:12px;padding:5px 9px}
+  .sub-nav-cta{font-size:11px;padding:5px 12px}
+
+  /* Hero */
+  .hero{padding:28px 20px 40px;min-height:auto}
+  .hero h1{font-size:clamp(1.9rem,7.5vw,2.6rem);line-height:1.0}
+  .hero-sub{font-size:14px}
+  .hero-actions{flex-direction:column;gap:10px}
+  .hero-actions .btn-primary,
+  .hero-actions .btn-secondary{width:100%;justify-content:center}
+  .hero-logo-badges{overflow-x:auto;padding-bottom:4px;max-width:100%}
+
+  /* Sections — fix hardcoded 80px side padding */
+  .solutions-section{padding:44px 20px 36px}
+  .smartprice-section{padding:52px 20px}
+  .usecase-section{padding:44px 20px}
+  .cta-section{padding:52px 20px}
+
+  /* Solutions */
+  .solutions-layout{grid-template-columns:1fr}
+  .sol-grid{grid-template-columns:1fr}
+  .sol-expansion-inner{grid-template-columns:1fr;gap:12px}
+  .sol-expansion.open{max-height:600px}
+
+  /* SmartPRICE — hide complex absolute-positioned UI cluster on mobile */
+  .sp-cluster-outer{display:none}
+  .smartprice-top{grid-template-columns:1fr}
+  .sp-features{grid-template-columns:repeat(2,1fr)}
+
+  /* Use cases */
+  .uc-expansion-inner{grid-template-columns:1fr;gap:14px}
+  .uc-expansion.open{max-height:900px}
+
+  /* Footer */
+  .trg-footer-certs{padding:28px 20px}
+  .trg-footer-main{padding:40px 20px}
+  .trg-footer-siteby{padding:14px 20px}
+}
+
+/* ── SMALL MOBILE (≤480px) ── */
+@media(max-width:480px){
+  /* Sub-nav: even more compact */
+  .sub-nav{padding:0 10px}
+  .sub-nav-links a{font-size:11px;padding:4px 8px}
+  .sub-nav-cta{font-size:10px;padding:5px 10px;letter-spacing:.04em}
+
+  /* Hero badges: smaller */
+  .hero-badge.logo-badge .hero-badge-text{font-size:9px}
+  .hero-badge.tradewinds-badge img,
+  .hero-badge.cmmc-badge img{height:38px;max-width:72px}
+
+  /* Sections */
+  .solutions-section{padding:36px 16px 30px}
+  .smartprice-section{padding:44px 16px}
+  .usecase-section{padding:36px 16px}
+  .cta-section{padding:44px 16px}
+
+  /* SmartPRICE features: single column */
+  .sp-features{grid-template-columns:1fr}
+
+  /* Use case cards: single column */
+  .usecase-grid{grid-template-columns:1fr}
+
+  /* Cert grid: single column */
+  .trg-cert-grid{grid-template-columns:1fr}
+  .trg-cert-cmmi{justify-content:center}
+
+  /* Footer */
+  .trg-footer-main{padding:32px 16px;gap:32px}
+  .trg-footer-certs{padding:24px 16px}
+  .trg-footer-siteby{padding:12px 16px}
+
+  /* Buttons */
+  .btn-primary,.btn-secondary{font-size:13px;padding:11px 20px}
+}
+/* END MOBILE RESPONSIVE FIXES */
 .sp-tw-logo{height:18px;max-width:130px;width:auto;opacity:.88;filter:brightness(0) invert(1);flex-shrink:0;display:block}
 .sp-tw-label{font-size:13px;color:rgba(255,255,255,.65);font-weight:500;line-height:1.4}
 .sp-usage-line{font-size:13px;color:rgba(255,255,255,.5);margin-top:8px;font-style:italic}
@@ -1079,7 +1223,20 @@ h2.section-title.light{color:#fff}
     <a href="#contact">Contact</a>
     <svg class="nav-search" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
   </div>
+  <!-- Hamburger button (mobile only) -->
+  <button class="nav-hamburger" id="navHamburger" aria-label="Open navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<!-- Mobile nav overlay -->
+<div class="mobile-nav-overlay" id="mobileNavOverlay">
+  <a href="#">About</a>
+  <a href="#" class="nav-active">Capabilities</a>
+  <a href="#">Contracts</a>
+  <a href="#">Projects</a>
+  <a href="#">Careers</a>
+  <a href="#contact">Contact</a>
+</div>
 
 <!-- SUB-NAV -->
 <div class="sub-nav">
@@ -1440,6 +1597,33 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible");obs.unobserve(e.target)}})},{threshold:0.06,rootMargin:"0px 0px -20px 0px"});
 document.querySelectorAll(".reveal").forEach(el=>obs.observe(el));
+
+// Hamburger menu toggle
+const hamburger=document.getElementById("navHamburger");
+const mobileOverlay=document.getElementById("mobileNavOverlay");
+if(hamburger&&mobileOverlay){
+  hamburger.addEventListener("click",()=>{
+    const isOpen=mobileOverlay.classList.toggle("open");
+    hamburger.classList.toggle("open",isOpen);
+    hamburger.setAttribute("aria-expanded",isOpen);
+  });
+  // Close on link click
+  mobileOverlay.querySelectorAll("a").forEach(a=>{
+    a.addEventListener("click",()=>{
+      mobileOverlay.classList.remove("open");
+      hamburger.classList.remove("open");
+      hamburger.setAttribute("aria-expanded","false");
+    });
+  });
+  // Close on outside click
+  document.addEventListener("click",e=>{
+    if(!hamburger.contains(e.target)&&!mobileOverlay.contains(e.target)){
+      mobileOverlay.classList.remove("open");
+      hamburger.classList.remove("open");
+      hamburger.setAttribute("aria-expanded","false");
+    }
+  });
+}
 
 const sections=["solutions","smartprice","usecases"];
 const subLinks=document.querySelectorAll(".sub-nav-links a");
